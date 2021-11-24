@@ -30,6 +30,7 @@
   <div class="form-group">
       <input type="submit" name="btn_comprar" class="btn btn-success" value="Comprar">      
   </div>
+  <a href="compras.php" class="btn btn-info">Ver compras</a>
   </form>
 </center>
 

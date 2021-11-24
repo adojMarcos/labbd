@@ -39,6 +39,44 @@
    </tbody>
 </table> 
 
+<h2 class="text-center">Items comprados</h2>
+
+<table class="table table-striped table-bordered table-hover">
+    
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Marca</th>
+            <th>Sexo</th>
+            <th>Tamanho</th>
+        </tr>
+    </thead>
+    <tbody>
+<?php 
+
+ $selectc_stmt=$db->prepare("SELECT tblt.nome, tblt.marca, tblt.Sexo, tblt.Tamanho, tbli.Quantidade FROM `tbl_tenis` as tblt
+                            INNER JOIN tbl_item as tbli 
+                            on tblt.Id_produto = tbli.Id_produto
+                            WHERE tbli.Id_pedido = :vid");
+
+$selectc_stmt->bindParam(":vid", $_SESSION['idPedido']);
+$selectc_stmt->execute();
+
+while($row=$selectc_stmt->fetch(PDO::FETCH_ASSOC))
+{
+?>
+       <tr>
+           <td><?php echo $row['nome']; ?></td>
+           <td><?php echo $row['marca']; ?></td>
+           <td><?php echo $row['Sexo']; ?></td>
+           <td><?php echo $row['Tamanho']; ?></td>
+       </tr>
+   <?php
+}
+?>
+  </tbody>
+</table> 
+
 <?php
     if(isset($_REQUEST['comprar']))
     {
